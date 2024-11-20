@@ -50,9 +50,9 @@ public:
     }
 
     void push(const int &x) {
-        if (top == capacity - 1)
+        if (front == capacity - 1)
             doubleCapacity();
 
-        st[++top] = x;
+        st[++front] = x;
     }
 };
