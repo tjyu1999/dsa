@@ -42,17 +42,17 @@ public:
         return st[front];
     }
 
-    void pop() {
-        if (empty())
-            throw std::runtime_error("Stack is empty.");
-
-        --front;
-    }
-
     void push(const int &x) {
         if (front == capacity - 1)
             doubleCapacity();
 
         st[++front] = x;
+    }
+
+    void pop() {
+        if (empty())
+            throw std::runtime_error("Stack is empty.");
+
+        --front;
     }
 };
