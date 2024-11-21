@@ -5,7 +5,7 @@ class Stack {
 private:
     int *st;
     int capacity;
-    int front;
+    int _top;
 
     void doubleCapacity() {
         capacity *= 2;
@@ -19,7 +19,7 @@ private:
     }
 
 public:
-    Stack(int c) : capacity(c), front(-1) {
+    Stack(int c) : capacity(c), _top(-1) {
         st = new int [capacity];
     }
 
@@ -28,31 +28,31 @@ public:
     }
 
     bool empty() const {
-        return front == -1;
+        return _top == -1;
     }
 
     int size() const {
-        return front + 1;
+        return _top + 1;
     }
 
     int top() {
         if (empty())
             throw std::runtime_error("Stack is empty.");
 
-        return st[front];
+        return st[_top];
     }
 
     void push(const int &x) {
-        if (front == capacity - 1)
+        if (_top == capacity - 1)
             doubleCapacity();
 
-        st[++front] = x;
+        st[++_top] = x;
     }
 
     void pop() {
         if (empty())
             throw std::runtime_error("Stack is empty.");
 
-        --front;
+        --_top;
     }
 };
