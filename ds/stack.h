@@ -1,77 +1,66 @@
-#ifndef _QUEUE
-#define _QUEUE
+#ifndef _STACK
+#define _STACK
 
 #include <iostream>
 #include <stdexcept>
 
-class Queue {
+class Stack {
 private:
-    int *q;
+    int *st;
     int capacity;
-    int _front;
-    int _back;
+    int _top;
 
     void doubleCapacity() {
         capacity *= 2;
-        int *q_new = new int [capacity];
-        int j = -1;
-        
-        for (int i = _front + 1; i <= _back; ++i)
-            q_new[++j] = q[i];
+        int *st_new = new int [capacity];
 
-        _front = -1;
-        _back = j;
-        delete[] q;
-        q = q_new;
+        for (int i = 0; i < capacity / 2; ++i)
+            st_new[i] = st[i];
+
+        delete[] st;
+        st = st_new;
     }
     
     bool full() const {
-        return _back == capacity - 1;
+        return _top == capacity - 1;
     }
 
 public:
-    Queue(int c) : capacity(c), _front(-1), _back(-1) {
-        q = new int [capacity];
+    Stack(int c) : capacity(c), _top(-1) {
+        st = new int [capacity];
     }
 
-    ~Queue() {
-        delete[] q;
+    ~Stack() {
+        delete[] st;
     }
 
     bool empty() const {
-        return _front == _back;
+        return _top == -1;
     }
 
     int size() const {
-        return _back - _front;
+        return _top + 1;
     }
 
-    int front() {
+    int top() {
         if (empty())
-            throw std::runtime_error("Queue is empty.");
+            throw std::runtime_error("Stack is empty.");
 
-        return q[_front + 1];
-    }
-    
-    int back() {
-        if (empty())
-            throw std::runtime_error("Queue is empty.");
-
-        return q[_back];
+        return st[_top];
     }
 
     void push(const int &x) {
         if (full())
             doubleCapacity();
 
-        q[++_back] = x;
+        st[++_top] = x;
     }
 
     void pop() {
         if (empty())
-            throw std::runtime_error("Queue is empty.");
+            throw std::runtime_error("Stack is empty.");
 
-        ++_front;
+        --_top;
     }
 };
 
