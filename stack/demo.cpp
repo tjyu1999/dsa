@@ -23,4 +23,6 @@ int main() {
     catch(const std::runtime_error &e) {
         std::cerr << "Stack Exception: " << e.what() << std::endl;
     }
+
+    return 0;
 }
