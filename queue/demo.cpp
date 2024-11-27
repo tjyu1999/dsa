@@ -21,7 +21,7 @@ int main() {
         std::cout << "q.size() = " << q.size() << std::endl;
         q.pop();
     }
-    catch(const std::runtime_error &e) {
+    catch (const std::runtime_error &e) {
         std::cerr << "Queue Exception: " << e.what() << std::endl;
     }    
     
