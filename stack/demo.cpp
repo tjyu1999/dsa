@@ -20,7 +20,7 @@ int main() {
         std::cout << "st.size() = " << st.size() << std::endl;
         st.pop();
     }
-    catch(const std::runtime_error &e) {
+    catch (const std::runtime_error &e) {
         std::cerr << "Stack Exception: " << e.what() << std::endl;
     }
 
