@@ -1,5 +1,6 @@
 #include <vector>
 #include "sort.h"
+#include "utils.h"
 
 int partition(std::vector<int> &nums, int start, int end) {
     int pivot = nums[end];
@@ -7,10 +8,10 @@ int partition(std::vector<int> &nums, int start, int end) {
     
     for (int j = start; j < end; j++) {
         if (nums[j] <= pivot)
-            std::swap(nums[i++], nums[j]);
+            swap(nums[i++], nums[j]);
     }
-    std::swap(nums[i], nums[end]);
     
+    swap(nums[i], nums[end]);
     return i;
 }
 
