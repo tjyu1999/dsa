@@ -10,7 +10,7 @@ TARGET = test
 SRCS = test.cpp insertionSort.cpp bubbleSort.cpp quickSort.cpp mergeSort.cpp heapSort.cpp ../utils/utils.cpp
 
 $(TARGET): $(SRCS)
-  $(CXX) $(CFLAGS) $(SRCS) $(LDLIBS) -o $(TARGET)
+  	$(CXX) $(CFLAGS) $(SRCS) $(LDLIBS) -o $(TARGET)
 
 clean::
 	rm -f $(TARGET)
