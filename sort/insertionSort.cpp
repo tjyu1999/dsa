@@ -2,7 +2,7 @@
 #include "sort.h"
 
 void insertionSort(std::vector<int> &nums) {
-    for (int i = 1; i < (int) nums.size(); ++i) {
+    for (int i = 1; i < nums.size(); ++i) {
         int key = nums[i];
         int j = i - 1;
         
