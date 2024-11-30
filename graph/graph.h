@@ -21,12 +21,6 @@ private:
         bool visited;
         ListNode *adj;
     };
-
-    void addNode(int n) {  
-        vertices[n].data = n;
-        vertices[n].visited = false;
-        vertices[n].adj = nullptr;
-    }
     
     void deleteAll(ListNode *node) {
         ListNode *next;
@@ -36,6 +30,20 @@ private:
             delete node;
             node = next;
         }
+    }
+
+    void addNode(int n) {  
+        vertices[n].data = n;
+        vertices[n].visited = false;
+        vertices[n].adj = nullptr;
+    }
+    
+    void addEdge(int n1, int n2) {
+        if (n1 < 0 || n1 >= num_vertices || n2 < 0 || n2 >= num_vertices)
+            throw std::runtime_error("Graph edge is out of bound.");
+        
+        addEdge(vertices[n1].adj, &vertices[n2]);
+        addEdge(vertices[n2].adj, &vertices[n1]);
     }
     
     void addEdge(ListNode *&node, Vertex *v) {
@@ -67,15 +75,8 @@ public:
             deleteAll(vertices[i].adj);
     }
     
-    void addEdge(int n1, int n2) {
-        if (n1 < 0 || n1 >= num_vertices || n2 < 0 || n2 >= num_vertices)
-            throw std::runtime_error("Graph edge is out of bound.");
-        
-        addEdge(vertices[n1].adj, &vertices[n2]);
-        addEdge(vertices[n2].adj, &vertices[n1]);
-    }
-    
     void bfs(int);
+    void dfs(int);
 };
 
 #endif
