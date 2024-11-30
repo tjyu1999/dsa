@@ -1,4 +1,4 @@
-# a makefile for building a test program to verify sort algorithm
+# a makefile for building a demo program to verify graph structure
 
 CXX = g++
 CFLAGS = -I../utils -Wall $(warnflags)
