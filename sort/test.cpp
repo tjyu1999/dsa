@@ -38,8 +38,7 @@ sortFuncPtr getFunc(int n) {
 
 void defaultTest(sortFuncPtr sortingFunc) {
     int len = 5 + rand() % 16;
-    std::vector<int> nums(len);
-    randomVec(nums);
+    std::vector<int> nums = randomVec(len);
     std::vector<int> ans = nums;
     std::sort(ans.begin(), ans.end());
     
