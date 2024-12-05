@@ -9,15 +9,18 @@ void swap(int &a, int &b) {
     b = temp;
 }
 
-void printVec(std::vector<int> &nums) {
+void printVec(const std::vector<int> &nums) {
     for (auto n : nums)
         std::cout << n << " ";
     std::cout << std::endl;
 }
 
-void randomVec(std::vector<int> &nums) {
+std::vector<int> randomVec(const int &len) {
     srand(unsigned(time(0)));
+    std::vector<int> nums;
     
-    for (int i = 0; i < (int) nums.size(); ++i)
-        nums[i] = rand() % 100;
+    for (int i = 0; i < len; ++i)
+        nums.push_back(rand() % 100);
+    
+    return nums;
 }
