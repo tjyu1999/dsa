@@ -57,7 +57,7 @@ private:
         ++num_edges;
     }
     
-    void addEdge(ListNode *&node, Vertex *v) {
+    void __addEdge(ListNode *&node, Vertex *v) {
         ListNode *n = new ListNode;
         n->vptr = v;
         n->next = nullptr;
@@ -91,8 +91,8 @@ public:
         if (n1 < 0 || n1 >= num_vertices || n2 < 0 || n2 >= num_vertices)
             throw std::runtime_error("Graph edge is out of bound.");
         
-        addEdge(vertices[n1].adj, &vertices[n2]);
-        addEdge(vertices[n2].adj, &vertices[n1]);
+        __addEdge(vertices[n1].adj, &vertices[n2]);
+        __addEdge(vertices[n2].adj, &vertices[n1]);
     }
     
     void addEdgeWeight(int n1, int n2, int w) {
@@ -100,8 +100,8 @@ public:
             throw std::runtime_error("Graph edge is out of bound.");
         
         setEdge(&vertices[n1], &vertices[n2], w);
-        addEdge(vertices[n1].adj, &vertices[n2]);
-        addEdge(vertices[n2].adj, &vertices[n1]);
+        __addEdge(vertices[n1].adj, &vertices[n2]);
+        __addEdge(vertices[n2].adj, &vertices[n1]);
     }
     
     std::vector<int> bfs(const int);
