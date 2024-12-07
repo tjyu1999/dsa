@@ -4,12 +4,16 @@
 #include <iostream>
 #include <vector>
 #include <stdexcept>
+#include "utils.h"
 
 class Graph {
 private:
     int num_vertices;
+    int num_edges;
     struct Vertex;
+    struct Edge;
     std::vector<Vertex> vertices;
+    std::vector<Edge> edges;
     
     struct ListNode {
         Vertex *vptr;
@@ -22,6 +26,12 @@ private:
         ListNode *adj;
     };
     
+    struct Edge {
+        int w;
+        Vertex *v1ptr;
+        Vertex *v2ptr;
+    };
+    
     void deleteAll(ListNode *node) {
         ListNode *next;
         
@@ -32,18 +42,19 @@ private:
         }
     }
 
-    void addNode(int n) {  
+    void setNode(int n) {  
         vertices[n].data = n;
         vertices[n].visited = false;
         vertices[n].adj = nullptr;
     }
     
-    void addEdge(int n1, int n2) {
-        if (n1 < 0 || n1 >= num_vertices || n2 < 0 || n2 >= num_vertices)
-            throw std::runtime_error("Graph edge is out of bound.");
-        
-        addEdge(vertices[n1].adj, &vertices[n2]);
-        addEdge(vertices[n2].adj, &vertices[n1]);
+    void setEdge(Vertex *v1, Vertex *v2, int w) {
+        Edge e;
+        e.w = w;
+        e.v1ptr = v1;
+        e.v2ptr = v2;
+        edges.push_back(e);
+        ++num_edges;
     }
     
     void addEdge(ListNode *&node, Vertex *v) {
@@ -62,12 +73,13 @@ private:
         }
     }
     
-    void dfsHelper(Vertex *v);
+    void dfsHelper(Vertex *, std::vector<int> &);
+    void sortEdges(std::vector<Edge> &);
 
 public:
     Graph(int n) : num_vertices(n), vertices(n) {
         for (int i = 0; i < num_vertices; ++i)
-            addNode(i);
+            setNode(i);
     }
     
     ~Graph() {
@@ -75,8 +87,27 @@ public:
             deleteAll(vertices[i].adj);
     }
     
-    void bfs(int);
-    void dfs(int);
+    void addEdge(int n1, int n2) {
+        if (n1 < 0 || n1 >= num_vertices || n2 < 0 || n2 >= num_vertices)
+            throw std::runtime_error("Graph edge is out of bound.");
+        
+        addEdge(vertices[n1].adj, &vertices[n2]);
+        addEdge(vertices[n2].adj, &vertices[n1]);
+    }
+    
+    void addEdgeWeight(int n1, int n2, int w) {
+        if (n1 < 0 || n1 >= num_vertices || n2 < 0 || n2 >= num_vertices)
+            throw std::runtime_error("Graph edge is out of bound.");
+        
+        setEdge(&vertices[n1], &vertices[n2], w);
+        addEdge(vertices[n1].adj, &vertices[n2]);
+        addEdge(vertices[n2].adj, &vertices[n1]);
+    }
+    
+    std::vector<int> bfs(const int);
+    std::vector<int> dfs(const int);
+    std::vector<std::vector<int>> kruskalMST();
+    std::vector<std::vector<int>> primMST();
 };
 
 #endif
