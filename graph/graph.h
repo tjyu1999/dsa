@@ -4,7 +4,6 @@
 #include <iostream>
 #include <vector>
 #include <stdexcept>
-#include "utils.h"
 
 class Graph {
 private:
