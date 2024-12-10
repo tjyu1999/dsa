@@ -74,6 +74,7 @@ private:
     
     void dfsHelper(Vertex *, std::vector<int> &);
     void sortEdges(std::vector<Edge> &);
+    void sortEdgesHelper(Edge &, Edge &);
 
 public:
     Graph(int n) : num_vertices(n), vertices(n) {
