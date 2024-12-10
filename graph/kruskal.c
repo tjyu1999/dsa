@@ -6,10 +6,25 @@ struct Subset {
     int parent;
 };
 
-void Graph::sortEdges(std::vector<Edge> &sortedEdges) {
-    std::sort(sortedEdges.begin(), sortedEdges.end(), [](const Edge &e1, const Edge &e2) {
-        return e1.w < e2.w;
-    });
+void Graph::sortEdgesHelper(Edge &e1, Edge &e2) {
+    Edge temp = e1;
+    e1 = e2;
+    e2 = temp;
+}
+
+void Graph::sortEdges(std::vector<Edge> &edges) {
+    bool swapped;
+    
+    do {
+        swapped = false;
+        
+        for (int i = 0; i < edges.size(); ++i) {
+            if (edges[i - 1].w > edges[i].w) {
+                swapped = true;
+                sortEdgesHelper(edges[i - 1], edges[i]);
+            }
+        }
+    } while (swapped);
 }
 
 int findParent(std::vector<Subset> &subsets, int vdata) {
