@@ -24,3 +24,23 @@ std::vector<int> randomVec(const int &len) {
     
     return nums;
 }
+
+void printMST(const std::vector<std::vector<int>> &mst) {
+    for (auto e : mst) {
+        for (auto item : e)
+            std::cout << item << " ";
+            
+        std::cout << std::endl;
+    }
+}
+
+void reverse(std::vector<int> &vec) {
+    int l = 0;
+    int r = vec.size() - 1;
+
+    while (l < r) {
+        swap(vec[l], vec[r]);
+        ++l;
+        --r;
+    }
+}
