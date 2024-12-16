@@ -1,7 +1,6 @@
 #include <vector>
 #include <queue>
 #include "graph.h"
-#include "utils.h"
 
 void Graph::bfs(int n) {
     if (n < 0 || n >= num_vertices)
@@ -31,6 +30,4 @@ void Graph::bfs(int n) {
             node = node->next;
         }
     }
-    
-    printVec(traversal);
 }
