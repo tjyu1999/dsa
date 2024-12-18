@@ -2,7 +2,7 @@
 #include <queue>
 #include "graph.h"
 
-std::vector<int> Graph::bfs(int n) {
+std::vector<int> Graph::bfs(const int n) {
     if (n < 0 || n >= num_vertices)
         throw std::runtime_error("Start vertex is out of bound.");
     
@@ -30,6 +30,6 @@ std::vector<int> Graph::bfs(int n) {
             node = node->next;
         }
     }
-
+    
     return traversal;
 }
