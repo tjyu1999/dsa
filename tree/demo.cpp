@@ -1,95 +1,55 @@
-#include <stack>
-#include <queue>
+#include <iostream>
+#include <cassert>
+#include <stdexcept>
 #include "bstree.h"
 #include "utils.h"
 
-std::vector<int> BSTree::inOrder() const {
-    if (empty())
-        return {};
+int main() {
+    try {
+        BSTree bst(5);
+        bst.addLeft(5, 4);
+        bst.addLeft(4, 2);
+        bst.addLeft(2, 1);
+        bst.addRight(2, 3);
+        bst.addRight(5, 12);
+        bst.addLeft(12, 11);
+        bst.addLeft(11, 10);
+        bst.addRight(12, 20);
+        bst.addLeft(20, 18);
         
-    TreeNode *node = root;
-    std::vector<int> traversal;
-    std::stack<TreeNode*> st;
-    
-    while (node || !st.empty()) {
-        while (node) {
-            st.push(node);
-            node = node->lchild;
-        }
-        
-        node = st.top();
-        st.pop();
-        traversal.push_back(node->data);
-        node = node->rchild;
+        bst.printTree();
+        assert(bst.searchBST(12));
+        bst.insertBST(15);
+        bst.printTree();
+        bst.removeBST(2);
+        bst.printTree();
     }
-    
-    return traversal;
-}
-
-std::vector<int> BSTree::preOrder() const { 
-    if (empty())
-        return {};
-           
-    TreeNode *node = root;
-    std::vector<int> traversal;
-    std::stack<TreeNode*> st{{node}};
-    
-    while (!st.empty()) {
-        node = st.top();
-        st.pop();
-        traversal.push_back(node->data);
-        
-        if (node->rchild)
-            st.push(node->rchild);
-        if (node->lchild)
-            st.push(node->lchild);
-    }
-        
-    return traversal;
-}
-
-std::vector<int> BSTree::postOrder() const {
-    if (empty())
-        return {};
-    
-    TreeNode *node = root;
-    std::vector<int> traversal;
-    std::stack<TreeNode*> st{{node}};
-    
-    while (!st.empty()) {
-        node = st.top();
-        st.pop();
-        traversal.push_back(node->data);
-            
-        if (node->lchild)
-            st.push(node->lchild);
-        if (node->rchild)
-            st.push(node->rchild);
+    catch(const std::runtime_error &e) {
+        std::cerr << "BSTree Exception: " << e.what() << std::endl;
     }
 
-    reverse(traversal);
-    return traversal;
-}
-
-void BSTree::levelOrder() {
-    std::queue<TreeNode*> q{{root}};
-    
-    while (!q.empty()) {
-        int size = q.size();
-                  
-        for (int i = 0; i < size; ++i) {
-            TreeNode *node = q.front();
-            q.pop();
-            std::cout << node->data << " ";
-            
-            if (node->lchild)
-                q.push(node->lchild);
-            if (node->rchild)
-                q.push(node->rchild);
-        }
+    try {
+        BSTree bst(5);
+        bst.addLeft(5, 4);
+        bst.addLeft(4, 2);
+        bst.addLeft(2, 1);
+        bst.addRight(2, 3);
+        bst.addRight(5, 12);
+        bst.addLeft(12, 11);
+        bst.addLeft(11, 10);
+        bst.addRight(12, 20);
+        bst.addLeft(20, 18);
         
-        std::cout << std::endl;
+        std::cout << "Inorder:   ";
+        printVec(bst.inOrder());
+        std::cout << "Preorder:  ";
+        printVec(bst.preOrder());
+        std::cout << "Postorder: ";
+        printVec(bst.postOrder());
     }
-        
-    std::cout << std::endl;
+    catch(const std::runtime_error &e) {
+        std::cerr << "BSTree Exception: " << e.what() << std::endl;
+    }
+    
+    return 0;
 }
