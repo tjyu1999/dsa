@@ -5,7 +5,7 @@
 namespace sort {
     template <typename T>
     void insertion_sort(std::vector<T> &arr) {
-        for (int i = 0; i < arr.size(); i++) {
+        for (int i = 1; i < (int)arr.size(); i++) {
             T temp = arr[i];
             int j = i - 1;
 
