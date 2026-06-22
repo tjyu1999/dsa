@@ -1,9 +1,9 @@
 CXX      := g++
-CXXFLAGS := -Wall -Wextra -Werror -I./include
+CXXFLAGS := -Wall -Wextra -Werror -I./include -I./src
 
-TEST_FILES := $(wildcard test/test_*.cpp)
-TESTS      := $(patsubst test/%.cpp,%,$(TEST_FILES))
-all: $(TESTS)
+TEST_FILE := $(wildcard test/test_*.cpp)
+TEST      := $(patsubst test/%.cpp,%,$(TEST_FILE))
+all       : $(TEST)
 
 test_%: test/test_%.cpp
 	@$(CXX) $(CXXFLAGS) $< -o $@
@@ -11,6 +11,6 @@ test_%: test/test_%.cpp
 	@rm -f $@
 
 clean:
-	@rm -f $(TESTS)
+	@rm -f $(TEST)
 
 .PHONY: all clean
